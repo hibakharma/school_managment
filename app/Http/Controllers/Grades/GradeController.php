@@ -43,7 +43,7 @@ class GradeController extends Controller
   {
 $validated = $request->validated();
 Grade::create([
-    'Name'=> $request->Name,
+    'Name'=> ['en'=>$request->Name_en , 'ar'=>$request->Name],
     'Notes' => $request->Notes,
 ]);
       session()->flash('success');
