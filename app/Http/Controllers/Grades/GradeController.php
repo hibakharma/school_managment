@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Grades;
 use App\Http\Controllers\Controller;
 
 
+use App\Http\Requests\StoreGrades;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 
@@ -18,10 +19,8 @@ class GradeController extends Controller
    */
   public function index()
   {
-
       $Grades= Grade::all();
-
-return view('Pages.Grades.grades',compact('Grades'));
+    return view('Pages.Grades.grades',compact('Grades'));
   }
 
   /**
@@ -34,13 +33,21 @@ return view('Pages.Grades.grades',compact('Grades'));
 
   }
 
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @return Response
-   */
-  public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param StoreGrades $request
+     * @return void
+     */
+  public function store(StoreGrades $request)
   {
+$validated = $request->validated();
+Grade::create([
+    'Name'=> $request->Name,
+    'Notes' => $request->Notes,
+]);
+      session()->flash('success');
+      return redirect('/Grades');
 
   }
 
