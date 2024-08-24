@@ -41,15 +41,21 @@ class GradeController extends Controller
      */
   public function store(StoreGrades $request)
   {
-$validated = $request->validated();
-Grade::create([
-    'Name'=> ['en'=>$request->Name_en , 'ar'=>$request->Name],
-    'Notes' => $request->Notes,
-]);
-      toastr()->success('messages.success');
+      try {
+          $validated = $request->validated();
+          Grade::create([
+              'Name'=> ['en'=>$request->Name_en , 'ar'=>$request->Name],
+              'Notes' => $request->Notes,
+          ]);
+          toastr()->success('messages.success');
 
 
-      return redirect('/Grades');
+          return redirect('/Grades');
+      }
+      catch (\Exception $e){
+          return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+      }
+
 
   }
 
