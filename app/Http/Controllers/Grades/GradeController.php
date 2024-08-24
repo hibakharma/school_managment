@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Grades;
 
 use App\Http\Controllers\Controller;
+
+
+use App\Models\Grade;
 use Illuminate\Http\Request;
 
 class GradeController extends Controller
@@ -15,7 +18,10 @@ class GradeController extends Controller
    */
   public function index()
   {
-return view('Grades.grades');
+
+      $Grades= Grade::all();
+
+return view('Pages.Grades.grades',compact('Grades'));
   }
 
   /**

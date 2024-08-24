@@ -1,7 +1,5 @@
 <?php
 
-
-
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -34,8 +32,6 @@ Route::group(['middleware'=>['guest']],function (){
 
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index']);
-
-
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -43,12 +39,31 @@ Route::group(
     ], function(){
 
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::group(['namespace' => 'App\Http\Controllers\Grades'], function () {
+        Route::resource('Grades','GradeController');
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 
 
-Route::group(['namespace' => 'App\Http\Controllers\Grades'], function () {
-    Route::resource('Grades','GradeController');
-});
 
 
 
