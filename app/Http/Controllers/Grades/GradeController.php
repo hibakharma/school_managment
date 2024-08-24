@@ -87,8 +87,26 @@ class GradeController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function update($id)
+  public function update(Request $request , $id )
   {
+      try {
+
+        //  $validated = $request->validated();
+        $grade= Grade::find($request->id );
+        $grade->update([
+            'Name'=> ['en'=>$request->Name_en , 'ar'=>$request->Name],
+            'Notes' => $request->Notes,
+        ]);
+
+          toastr()->success('messages.success');
+
+
+          return redirect('/Grades');
+      }
+      catch (\Exception $e){
+          return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+      }
+
 
   }
 
@@ -98,8 +116,15 @@ class GradeController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function destroy($id)
+  public function destroy(Request $request)
   {
+      $grade=Grade::find($request->id);
+      $grade->delete();
+      toastr()->success('messages.Delete');
+
+
+      return redirect('/Grades');
+
 
   }
 
