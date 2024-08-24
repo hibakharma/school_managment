@@ -46,7 +46,9 @@ Grade::create([
     'Name'=> ['en'=>$request->Name_en , 'ar'=>$request->Name],
     'Notes' => $request->Notes,
 ]);
-      session()->flash('success');
+      toastr()->success('messages.success');
+
+
       return redirect('/Grades');
 
   }
