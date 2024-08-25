@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Classrooms;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\StoreClassroom;
 use App\Models\Classroom;
 use App\Models\Grade;
 use Illuminate\Http\Request;
@@ -39,19 +40,20 @@ class ClassroomController extends Controller
      * @param Request $request
      * @return Response
      */
-  public function store(Request $request)
+  public function store(StoreClassroom $request)
   {
       $List_Classes= $request->List_Classes;
       try {
           foreach ($List_Classes as $List_Class)
           {
+              $validated=$request->validate();
               $My_classes= new Classroom();
               $My_classes->Name_class=['en'=> $List_Class['Name_class_en'] ,'ar'=>$List_Class['Name']];
               $My_classes->Grade_id=$List_Class['Grade_id'];
               $My_classes->save();
           }
           toastr()->success(trans('messages.success'));
-          return redirect()->route('classrooms.index');
+          return redirect()->route('classrooms');
 
       }
       catch (\Exception $e){
