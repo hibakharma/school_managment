@@ -43,6 +43,7 @@ class ClassroomController extends Controller
   public function store(StoreClassroom $request)
   {
       $List_Classes= $request->List_Classes;
+
       try {
           foreach ($List_Classes as $List_Class)
           {
@@ -91,22 +92,19 @@ class ClassroomController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function update(Request $request,$id)
+  public function update(StoreClassroom $request )
   {
-      $List_Classes= $request->List_Classes;
-      try {
-          foreach ($List_Classes as $List_Class)
-          {
-              $My_classes= Classroom::find($request->id);
-              if($My_classes){
-                  $My_classes->Name_class=['en'=> $List_Class['Name_class_en'] ,'ar'=>$List_Class['Name']];
-                  $My_classes->Grade_id=$List_Class['Grade_id'];
-                  $My_classes->update();
-              }
 
-          }
-          toastr()->success(trans('messages.success'));
-          return redirect()->route('classrooms.index');
+      try {
+       $validated=$request->validate();
+       $My_classes=Classroom::find($request->id)  ;
+              if($My_classes){
+                  $My_classes->Name_class=['en'=> $My_classes['Name_class_en'] ,'ar'=>$My_classes['Name']];
+                  $My_classes->Grade_id=$My_classes['Grade_id'];
+                  $My_classes->update();
+                  toastr()->success(trans('messages.success'));
+                  return redirect()->route('classrooms.index');
+              }
 
       }
       catch (\Exception $e){
