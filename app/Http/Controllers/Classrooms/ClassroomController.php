@@ -120,8 +120,12 @@ class ClassroomController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function destroy($id)
+  public function destroy(Request $request)
   {
+      $classroom =Classroom::find($request->id);
+      $classroom->delete();
+      toastr()->error(trans('messages.Delete'));
+      return redirect()->route('classrooms.index');
 
   }
 
