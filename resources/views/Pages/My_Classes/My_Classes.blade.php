@@ -190,7 +190,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <form class=" row mb-30" action="{{ route('Classrooms.store') }}" method="POST">
+                        <form class=" row mb-30" action="{{ route('Classrooms.store','test') }}" method="POST">
                             @csrf
 
                             <div class="card-body">
@@ -204,7 +204,7 @@
                                                     <label for="Name"
                                                            class="mr-sm-2">{{ trans('My_Classes_trans.Name_class') }}
                                                         :</label>
-                                                    <input class="form-control" type="text" name="Name" required />
+                                                    <input class="form-control" type="text" name="Name_class" required />
                                                 </div>
 
 

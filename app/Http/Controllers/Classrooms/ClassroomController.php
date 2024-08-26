@@ -47,14 +47,14 @@ class ClassroomController extends Controller
       try {
           foreach ($List_Classes as $List_Class)
           {
-              $validated=$request->validate();
+            //  $validated=$request->validate();
               $My_classes= new Classroom();
-              $My_classes->Name_class=['en'=> $List_Class['Name_class_en'] ,'ar'=>$List_Class['Name']];
+              $My_classes->Name_class=['en'=> $List_Class['Name_class_en'] ,'ar'=>$List_Class['Name_class']];
               $My_classes->Grade_id=$List_Class['Grade_id'];
               $My_classes->save();
           }
           toastr()->success(trans('messages.success'));
-          return redirect()->route('classrooms');
+          return redirect()->route('Classrooms');
 
       }
       catch (\Exception $e){
@@ -86,12 +86,12 @@ class ClassroomController extends Controller
 
   }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param StoreClassroom $request
+     * @return Response
+     */
   public function update(StoreClassroom $request )
   {
 

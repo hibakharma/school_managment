@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 
 use App\Http\Requests\StoreGrades;
+use App\Models\Classroom;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 
@@ -119,8 +120,16 @@ class GradeController extends Controller
   public function destroy(Request $request)
   {
       $grade=Grade::find($request->id);
+      $classrooms= Classroom::Select('*')->Where('Grade_id','=',$grade->id)->get();
+foreach ($classrooms as $classroom){
+    if(isset($classroom) ){
+        toastr()->error('Cant Delete');
+
+        return redirect('/Grades');
+    }
+}
       $grade->delete();
-      toastr()->success('messages.Delete');
+      toastr()->error(trans('messages.Delete'));
 
 
       return redirect('/Grades');
