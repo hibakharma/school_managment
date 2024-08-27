@@ -128,6 +128,15 @@ class ClassroomController extends Controller
       return redirect()->route('classrooms.index');
 
   }
+    public function delete_all(Request $request)
+    {
+        $delete_all_id = explode(",", $request->delete_all_id);
+                Classroom::whereIn('id', $delete_all_id)->delete();
+        toastr()->error(trans('messages.Delete'));
+        return redirect()->route('Classrooms.index');
+    }
+
+
 
 }
 
