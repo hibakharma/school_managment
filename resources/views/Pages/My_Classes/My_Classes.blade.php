@@ -33,6 +33,9 @@
                     <button type="button" class="button x-small" data-toggle="modal" data-target="#exampleModal">
                         {{ trans('My_Classes_trans.add_class') }}
                     </button>
+                        <button id="btn_delete_all" type="button" class="button x-small" data-toggle="modal" data-target="#exampleModal" >
+                            {{ trans('My_Classes_trans.delete_checkbox') }}
+                        </button>
                     <br><br>
 
                     <div class="table-responsive">
@@ -40,6 +43,11 @@
                                style="text-align: center">
                             <thead>
                             <tr>
+                                <th><input class="form-control" type="checkbox" name="select_all"
+                                           id="example_select_all"
+                                           onclick="check_all('box1',this)"
+                                           />
+                                </th>
                                 <th>#</th>
                                 <th>{{ trans('My_Classes_trans.Name_class') }}</th>
                                 <th>{{ trans('My_Classes_trans.Name_Grade') }}</th>
@@ -51,6 +59,10 @@
                             @foreach ($My_Classes as $My_Class)
                                 <tr>
                                     <?php $i++; ?>
+                                    <td><input class="box1" type="checkbox" name="select_all"
+                                               id="example_select_all"
+                                               value="{{$My_Class->id}}"
+                                        /></td>
                                     <td>{{ $i }}</td>
                                     <td>{{ $My_Class->Name_class }}</td>
                                     <td>{{ $My_Class->Grades->Name }}</td>
@@ -273,6 +285,23 @@
     </div>
 
     <!-- row closed -->
+    <script>
+        function check_all(className,elem) {
+            var elements=document.getElementsByClassName(className);
+            var l=elements.length;
+            if(elem.checked){
+                for(var i=0;i<l;i++){
+                    elements[i].checked=true;
+                }
+            }
+            else {
+                for(var i=0;i<l;i++){
+                    elements[i].checked=false;
+                }
+            }
+
+        }
+    </script>
 @endsection
 @section('js')
     @toastr_js

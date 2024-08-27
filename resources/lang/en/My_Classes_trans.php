@@ -14,6 +14,7 @@ return [
     'Name_Grade'=>'Name Grade',
     'add_row'=>'add row',
     'delete_row'=>'Delete row',
+    'delete_checkbox'=>'Delete checkbox',
     'Processes'=>'Processes',
     'Edit'=>'Edit',
     'Delete'=>'Delete',

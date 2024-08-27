@@ -7,6 +7,7 @@ return [
     'add_class' => 'اضافة صف',
     'edit_class'=> 'تعديل صف',
     'delete_class'=> 'حذف صف',
+    'delete_checkbox'=>'حذف الصفوف المختارة',
     'Warning_class'=> 'هل انت متاكد من عملية الحذف ؟',
     'stage_name_ar' => 'اسم الصف بالعربية',
     'stage_name_en' => 'اسم الصف بالانجليزية',
