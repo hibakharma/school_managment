@@ -119,20 +119,18 @@ class GradeController extends Controller
    */
   public function destroy(Request $request)
   {
-      $grade=Grade::find($request->id);
-      $classrooms= Classroom::Select('*')->Where('Grade_id','=',$grade->id)->get();
-foreach ($classrooms as $classroom){
-    if(isset($classroom) ){
-        toastr()->error('Cant Delete');
-
+      $classrooms_id= Classroom::Where('Grade_id',$request->id)->pluck('Grade_id');
+    if($classrooms_id->count() ==0){
+        $grade=Grade::find($request->id)->delete();
+        toastr()->error(trans('messages.Delete'));
         return redirect('/Grades');
     }
-}
-      $grade->delete();
-      toastr()->error(trans('messages.Delete'));
+    else{
+        toastr()->error('Cant Delete');
+        return redirect('/Grades');
+    }
 
 
-      return redirect('/Grades');
 
 
   }
