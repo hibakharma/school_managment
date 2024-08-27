@@ -1,5 +1,8 @@
 @extends('layouts.master')
 @section('css')
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
 
 @section('title')
     {{ trans('My_Classes_trans.title_page') }}
@@ -36,7 +39,19 @@
                         <button id="btn_delete_all" type="button" class="button x-small" data-toggle="modal" data-target="#delete_all" >
                             {{ trans('My_Classes_trans.delete_checkbox') }}
                         </button>
-                    <br><br>
+                        <form action="{{ route('Filter_Classes') }}" method="POST">
+                            {{ csrf_field() }}
+                            <select class="selectpicker" data-style="btn-info" name="Grade_id" required
+                                    onchange="this.form.submit()">
+                                <option value="" selected disabled>{{ trans('My_Classes_trans.Search_By_Grade') }}</option>
+                                <option value="all">{{ "all"}}</option>
+                                @foreach ($Grades as $Grade)
+                                    <option value="{{ $Grade->id }}">{{ $Grade->Name }}</option>
+                                @endforeach
+                            </select>
+                        </form>
+
+                        <br><br>
 
                     <div class="table-responsive">
                         <table id="datatable" class="table  table-hover table-sm table-bordered p-0" data-page-length="50"
@@ -55,8 +70,16 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @if (isset($details))
+
+                                <?php $List_Classes = $details; ?>
+                            @else
+
+                                <?php $List_Classes = $My_Classes; ?>
+                            @endif
+
                             <?php $i = 0; ?>
-                            @foreach ($My_Classes as $My_Class)
+                            @foreach ($List_Classes as $My_Class)
                                 <tr>
                                     <?php $i++; ?>
                                         <td><input type="checkbox"  value="{{ $My_Class->id }}" class="box1" ></td>

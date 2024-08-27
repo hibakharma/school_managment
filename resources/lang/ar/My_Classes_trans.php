@@ -21,4 +21,5 @@ return [
     'Edit'=>'تعديل',
     'Delete'=>'حذف',
     'Close' => 'اغلاق',
+    'Search_By_Grade' => 'فلترة حسب الصف',
 ];
