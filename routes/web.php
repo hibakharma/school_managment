@@ -55,6 +55,12 @@ Route::group(
         Route::post('Filter_Classes', 'ClassroomController@Filter_Classes')->name('Filter_Classes');
 
     });
+    //==============================Sections============================
+    Route::group(['namespace' => 'App\Http\Controllers\Sections'], function () {
+        Route::resource('Sections', 'SectionController');
+        Route::get('/classes/{id}', 'SectionController@getclasses');
+
+    });
 
 
 

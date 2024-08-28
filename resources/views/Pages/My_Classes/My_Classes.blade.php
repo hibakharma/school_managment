@@ -80,6 +80,7 @@
 
                             <?php $i = 0; ?>
                             @foreach ($List_Classes as $My_Class)
+
                                 <tr>
                                     <?php $i++; ?>
                                         <td><input type="checkbox"  value="{{ $My_Class->id }}" class="box1" ></td>
