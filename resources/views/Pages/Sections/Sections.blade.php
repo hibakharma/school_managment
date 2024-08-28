@@ -187,7 +187,24 @@
                                                                                         <div class="col">
                                                                                             <div class="form-check">
 
-                                                                                                  </div>
+                                                                                                @if ($list_Sections->Status === 1)
+                                                                                                    <input
+                                                                                                        type="checkbox"
+                                                                                                        checked
+                                                                                                        class="form-check-input"
+                                                                                                        name="Status"
+                                                                                                        id="exampleCheck1">
+                                                                                                @else
+                                                                                                    <input
+                                                                                                        type="checkbox"
+                                                                                                        class="form-check-input"
+                                                                                                        name="Status"
+                                                                                                        id="exampleCheck1">
+                                                                                                @endif
+                                                                                                <label
+                                                                                                    class="form-check-label"
+                                                                                                    for="exampleCheck1">{{ trans('Sections_trans.Status') }}</label>
+                                                                                            </div>
                                                                                         </div>
 
 
